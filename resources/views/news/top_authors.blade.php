@@ -7,7 +7,7 @@
         <h2>Najaktywniejsi autorzy:</h2>
         <ul>
           @foreach($authors as $author)
-            <li>{{ $author->name }} ({{ $author->post_count }} wpisy)</li>
+            <li>{{ $author->name }} ({{ $author->post_count }} wpisów)</li>
           @endforeach
         </ul>
 
