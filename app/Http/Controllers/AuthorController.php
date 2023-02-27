@@ -3,15 +3,15 @@
     namespace App\Http\Controllers;
     
     use App\Models\BlogAuthors;
+    use DB;
     use Illuminate\Support\Carbon;
-    use Illuminate\Support\Facades\DB;
 
     class AuthorController extends Controller
     {
         public function topAuthors()
         {
-            $startDate = Carbon::now()->subWeek();
-            $endDate = Carbon::now();
+            $startDate = Carbon::now()->subWeek(); // data początkowa to moment przed tygodniem
+            $endDate = Carbon::now(); // data końcowa to teraz
             
             $authors = BlogAuthors::select( 'blog_authors.id', 'blog_authors.name', DB::raw( 'COUNT(blog_posts_authors.post_id) as post_count' ) )
                 ->join( 'blog_posts_authors', 'blog_posts_authors.author_id', '=', 'blog_authors.id' )
@@ -23,6 +23,7 @@
                 ->get();
             
             return view( 'news.top_authors', [ 'authors' => $authors ] );
+            
             
         }
     }
