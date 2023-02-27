@@ -10,8 +10,8 @@
     {
         public function topAuthors()
         {
-            $startDate = Carbon::now()->subWeek(); // data początkowa to moment przed tygodniem
-            $endDate = Carbon::now(); // data końcowa to teraz
+            $startDate = Carbon::now()->subWeek();
+            $endDate = Carbon::now();
             
             $authors = BlogAuthors::select( 'blog_authors.id', 'blog_authors.name', DB::raw( 'COUNT(blog_posts_authors.post_id) as post_count' ) )
                 ->join( 'blog_posts_authors', 'blog_posts_authors.author_id', '=', 'blog_authors.id' )
